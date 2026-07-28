@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+webshield.db
+reports/*.html
+reports/*.pdf
+node_modules/
+frontend/dist/
+.env
