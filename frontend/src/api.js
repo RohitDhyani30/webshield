@@ -1,7 +1,10 @@
 // Thin wrapper around the WebShield backend API.
-// Dev server proxies /api/* to http://localhost:8000 (see vite.config.js).
+// Local dev: Vite proxies /api/* to http://localhost:8000 (see vite.config.js), so BASE stays '/api'.
+// Production (Vercel): set VITE_API_BASE_URL to Render backend URL, e.g.
+//   https://webshield-backend.onrender.com/api
 
-const BASE = '/api'
+
+const BASE = import.meta.env.VITE_API_BASE_URL || '/api'
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE}${path}`, {
