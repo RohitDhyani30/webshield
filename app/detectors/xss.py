@@ -25,7 +25,7 @@ only inspect raw HTML text), and confirmed findings report where evidence
 would be found without proving code execution in a live session, since we're
 not driving a browser.
 
-Scope / known limitations (state these explicitly in a viva):
+Scope / known limitations :
   - Reflected XSS only. Stored XSS needs a write request + a second read
     request to check persistence — not attempted here.
   - DOM-based XSS (payload never touches the server, purely client-side sink
