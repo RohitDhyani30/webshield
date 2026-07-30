@@ -6,7 +6,7 @@ export default function Header({ scanning }) {
           <span className={`brand-mark ${scanning ? 'active' : ''}`} />
           WebShield
         </div>
-        <div className="tagline">non-exploitative DAST scanner</div>
+        <div className="tagline">Non-Exploitative DAST scanner</div>
       </div>
       <div className="sweep-track">
         {scanning && <div className="sweep-line" />}

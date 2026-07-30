@@ -1,16 +1,19 @@
 import { useState, useEffect, useCallback } from 'react'
 import Header from './components/Header'
+import IntroPanel from './components/IntroPanel'
 import ScanForm from './components/ScanForm'
 import SeveritySummary from './components/SeveritySummary'
 import FindingsTable from './components/FindingsTable'
 import ReportActions from './components/ReportActions'
 import ScanHistory from './components/ScanHistory'
+import Footer from './components/Footer'
 import { startScan, getScan, listScans } from './api'
 
 export default function App() {
   const [scanning, setScanning] = useState(false)
   const [activeScan, setActiveScan] = useState(null)
   const [history, setHistory] = useState([])
+  const [prefillUrl, setPrefillUrl] = useState('')
 
   const loadHistory = useCallback(() => {
     listScans().then(setHistory).catch(() => {})
@@ -43,7 +46,9 @@ export default function App() {
     <>
       <Header scanning={scanning} />
 
-      <ScanForm onSubmit={handleSubmit} scanning={scanning} />
+      <IntroPanel onPickExample={setPrefillUrl} />
+
+      <ScanForm onSubmit={handleSubmit} scanning={scanning} prefillUrl={prefillUrl} />
 
       {activeScan && (
         <>
@@ -56,6 +61,8 @@ export default function App() {
       <div style={{ marginTop: 56 }}>
         <ScanHistory scans={history} onSelect={handleSelectHistory} />
       </div>
+
+      <Footer />
     </>
   )
 }

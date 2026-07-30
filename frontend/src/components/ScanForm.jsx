@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-export default function ScanForm({ onSubmit, scanning }) {
+export default function ScanForm({ onSubmit, scanning, prefillUrl }) {
   const [url, setUrl] = useState('')
   const [consent, setConsent] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [maxPages, setMaxPages] = useState('')
   const [maxDepth, setMaxDepth] = useState('')
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (prefillUrl) setUrl(prefillUrl)
+  }, [prefillUrl])
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -41,6 +45,7 @@ export default function ScanForm({ onSubmit, scanning }) {
         onChange={e => setUrl(e.target.value)}
         disabled={scanning}
       />
+      <p className="field-hint">Include the scheme (http:// or https://). Only scan targets you're authorized to test.</p>
 
       <button
         type="button"
